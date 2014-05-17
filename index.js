@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var type = require('type-component');
+var type = require('type');
 
 /**
  * Module exports.
@@ -47,7 +47,9 @@ function eql(matcher, val){
       // we match all values of `matcher` in `val`
       for (var i in matcher) {
         if (matcher.hasOwnProperty(i)) {
-          if (!eql(matcher[i], val[i])) return false;
+          if (!val.hasOwnProperty(i) || !eql(matcher[i], val[i])) {
+            return false;
+          }
         }
         keys[i] = true;
       }
